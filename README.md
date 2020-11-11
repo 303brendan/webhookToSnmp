@@ -2,7 +2,9 @@
 The concept behind this was the need to convert the Webhook payload (JSON) from a Datadog alert into an SNMP Trap that can be sent to a Trap Receiver.
 
 ## Disclaimer
-Use at your own risk.  If you modify the contents of the webhook payload you will have to ensure that the correct values are being parsed / stored in the `snmpTrap.py`.
+This Webhook to SNMP python script is property of whomever wants to maintain it. This script was created to help you convert Webhook (JSON via HTTP) to SNMP Trap via UDP.  Datadog will not provide ongoing support for this script but it can be modified and used at your own consent. If you have any questions please reach out to the developers of the python library pysnmp or work with your internal resources to troubleshoot.
+
+If you modify the contents of the webhook payload you will have to ensure that the correct values are being parsed / stored in the `snmpTrap.py`.
 
 ## Overview
 You will find one file `snmpTrap.py` which requires a few libraries (pysnmp & flask).  As long as you have these libraries installed on the server (install via `pip install X` command) you should be able to run this webservice which will expose the `webhook` endpoint, allow incoming JSON via http POST, and parse the JSON body.
