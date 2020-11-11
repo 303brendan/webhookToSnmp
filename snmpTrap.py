@@ -61,14 +61,16 @@ def respond():
     alerttype = webhookPayload['body']['alerttype']
     if "error" in alerttype: severity = 5
     elif "warning" in alerttype: severity = 2
-    else: severity = 0 #catch recoveries
+    elif "success" in alerttype: severity = 0
+    else: severity = 0 #catch all should not be hit
 
 
     #Check if alert or Resolution
     alerttransition = webhookPayload['body']['alerttransition']
     if "Recovered" in alerttransition: type = 2
+    elif "Warn" in alerttransition: type = 2
     elif "Triggered" in alerttransition: type = 1
-    else: type = 2 #catch
+    else: type = 2 #catch all but should never be seen
 
 
     #Hardcode Datadog Integration
