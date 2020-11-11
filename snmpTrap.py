@@ -1,12 +1,20 @@
+##################################################################################
+################################## Disclaimer ####################################
+##################################################################################
+
 '''
-         ____        __        ____
-        / __ \____ _/ /_____ _/ __ \____  ____ _
-       / / / / __ `/ __/ __ `/ / / / __ \/ __ `/
-      / /_/ / /_/ / /_/ /_/ / /_/ / /_/ / /_/ /
-     /_____/\__,_/\__/\__,_/_____/\____/\__, /
-                                       /____/
+This Webhook to SNMP python script is property of whomever wants to maintain it.
+Datadog Sales Engineers have help craft the script to convert Webhook (JSON via HTTP)
+to SNMP Trap via UDP at the customer request.  Datadog will not provide ongoing 
+support for this script but it can be modified and used at your own consent. If you 
+have any questions please reach out to the developers of the python library pysnmp
+or work with your internal resources to troubleshoot.
 '''
 
+
+##################################################################################
+################################## Packages ####################################
+##################################################################################
 from pysnmp.hlapi import *
 from pysnmp import debug
 
