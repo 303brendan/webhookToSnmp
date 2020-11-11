@@ -53,7 +53,9 @@ def respond():
     #Set Variables from webhook
 
     node = webhookPayload['body']['hostname']
+
     nodeAlias="10.0.0.1" #not sure how to get this from webhook
+
     summary = webhookPayload['body']['title']
 
 
@@ -75,7 +77,9 @@ def respond():
 
     #Hardcode Datadog Integration
     integration="DATADOG-INTEGRATION" #hardcoded to DATADOG
+
     alertgroup= "Server" #hard coded for now
+
     alertkey= webhookPayload['body']['hostname']
 
     #Additional Fields that may be useful
