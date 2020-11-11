@@ -52,71 +52,80 @@ def respond():
     webhookPayload = request.json
     #Set Variables from webhook
 
-    node = webhookPayload['body']['hostname']
+    body = webhookPayload.get('body',None)
+    if body:
+        node = body.get('hostname','NULL')
+        print (node)
+        #node = webhookPayload['body']['hostname']
 
-    #raplace
-    nodeAlias="10.0.0.1" #not sure how to get this from webhook
+        #replace
+        nodeAlias="10.0.0.1" #not sure how to get this from webhook
 
-    summary = webhookPayload['body']['title']
-
-
-    #Check Status of "alerttype" field and map to numberical value
-    alerttype = webhookPayload['body']['alerttype']
-    if "error" in alerttype: severity = 5
-    elif "warning" in alerttype: severity = 2
-    elif "success" in alerttype: severity = 0
-    else: severity = 0 #catch all should not be hit
+        summary = body.get('title','NULL')
+        #summary = webhookPayload['body']['title']
 
 
-    #Check if alert or Resolution
-    alerttransition = webhookPayload['body']['alerttransition']
-    if "Recovered" in alerttransition: type = 2
-    elif "Warn" in alerttransition: type = 1
-    elif "Triggered" in alerttransition: type = 1
-    else: type = 2 #catch all but should never be seen
+        #Check Status of "alerttype" field and map to numberical value
+        alerttype = body.get('alerttype','NULL')
+        #alerttype = webhookPayload['body']['alerttype']
+        if "error" in alerttype: severity = 5
+        elif "warning" in alerttype: severity = 2
+        elif "success" in alerttype: severity = 0
+        else: severity = 0 #catch all should not be hit
 
 
-    #Hardcode Datadog Integration
-    integration="DATADOG-INTEGRATION" #hardcoded to DATADOG
-
-    alertgroup= "Server" #hard coded for now
-
-    alertkey= webhookPayload['body']['hostname']
-
-    #Additional Fields that may be useful
-    link = webhookPayload['body']['link']
-    alertmetric = webhookPayload['body']['alertmetric']
-    body = webhookPayload['body']['body']
-    date = webhookPayload['body']['date']
-    alertstatus = webhookPayload['body']['alertstatus']
+        #Check if alert or Resolution
+        alerttransition = body.get('alerttransition','NULL')
+        #alerttransition = webhookPayload['body']['alerttransition']
+        if "Recovered" in alerttransition: type = 2
+        elif "Warn" in alerttransition: type = 1
+        elif "Triggered" in alerttransition: type = 1
+        else: type = 2 #catch all but should never be seen
 
 
+        #Hardcode Datadog Integration
+        integration="DATADOG-INTEGRATION" #hardcoded to DATADOG
 
-    errorIndication, errorStatus, errorIndex, varbinds = next(sendNotification(SnmpEngine(),
-         CommunityData('not_public'),
-         UdpTransportTarget(('{}'.format(snmpAddress), snmpPort)), #define IP or URL and Port to use for trap
-         ContextData(),
-         'trap',
-         [ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.1'), OctetString('{}'.format(node))),
-          ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.2'), OctetString('{}'.format(nodeAlias))),
-          ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.3'), OctetString('{}'.format(summary))),
-          ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.4'), OctetString('{}'.format(severity))),
-          ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.5'), OctetString('{}'.format(type))),
-          ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.6'), OctetString('{}'.format(integration))),
-          ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.7'), OctetString('{}'.format(alertgroup))),
-          ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.8'), OctetString('{}'.format(alertkey)))
+        alertgroup= "Server" #hard coded for now
 
-          ])
-    )
+        alertkey= body.get('hostname','NULL')
+        #alertkey= webhookPayload['body']['hostname']
 
-    if errorIndication:
-        print(errorIndication)
 
-    else:
-        print ("***************************************************************************************")
-        print("Successfully sent trap to {}".format(snmpAddress)+ " on port {}".format(snmpPort))
-        print ("")
-        return Response(status=200)
+        #Additional Fields that may be useful
+        link = body.get('link','NULL')
+        alertmetric = body.get('alertmetric','NULL')
+        fullbody = webhookPayload.get('body','NULL')
+        epochdate = body.get('date','NULL')
+        alertstatus = body.get('alertstatus','NULL')
+
+
+
+        errorIndication, errorStatus, errorIndex, varbinds = next(sendNotification(SnmpEngine(),
+             CommunityData('not_public'),
+             UdpTransportTarget(('{}'.format(snmpAddress), snmpPort)), #define IP or URL and Port to use for trap
+             ContextData(),
+             'trap',
+             [ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.1'), OctetString('{}'.format(node))),
+              ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.2'), OctetString('{}'.format(nodeAlias))),
+              ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.3'), OctetString('{}'.format(summary))),
+              ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.4'), OctetString('{}'.format(severity))),
+              ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.5'), OctetString('{}'.format(type))),
+              ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.6'), OctetString('{}'.format(integration))),
+              ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.7'), OctetString('{}'.format(alertgroup))),
+              ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.8'), OctetString('{}'.format(alertkey)))
+
+              ])
+        )
+
+        if errorIndication:
+            print(errorIndication)
+
+        else:
+            print ("***************************************************************************************")
+            print("Successfully sent trap to {}".format(snmpAddress)+ " on port {}".format(snmpPort))
+            print ("")
+            return Response(status=200)
 
 
 
