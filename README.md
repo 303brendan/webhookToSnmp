@@ -7,7 +7,7 @@ This Webhook to SNMP python script is property of whomever wants to maintain it.
 If you modify the contents of the webhook payload you will have to ensure that the correct values are being parsed / stored in the `snmpTrap.py`.
 
 ## Overview
-You will find one file `snmpTrap.py` which requires a few libraries (pysnmp & flask).  As long as you have these libraries installed on the server (install via `pip install X` command) you should be able to run this webservice which will expose the `webhook` endpoint, allow incoming JSON via http POST, and parse the JSON body.
+You will find one file `snmpTrap.py` which requires a few libraries (pysnmp & flask).  As long as you have these libraries installed on the server (install via `pip install X` command) you should be able to run this web service which will expose the `webhook` endpoint, allow incoming JSON via http POST, and parse the JSON body.
 
 ## To Run Flask
 1. Install Flask via `pip3 install Flask` 
