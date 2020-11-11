@@ -1,6 +1,9 @@
 # Datadog Webhook To Snmp
 The concept behind this was the need to convert the Webhook payload (JSON) from a Datadog alert into an SNMP Trap that can be sent to a Trap Receiver.
 
+## Disclaimer
+Use at your own risk.  If you modify the contents of the webhook payload you will have to ensure that the correct values are being parsed / stored in the `snmpTrap.py`.
+
 ## Overview
 You will find one file `snmpTrap.py` which requires a few libraries (pysnmp & flask).  As long as you have these libraries installed on the server (install via `pip install X` command) you should be able to run this webservice which will expose the `webhook` endpoint, allow incoming JSON via http POST, and parse the JSON body.
 
@@ -57,5 +60,4 @@ curl --insecure -XPOST -H "Content-type: application/json" -d '{
 }' 'http://127.0.0.1:5000/webhook'
 ```
 
-### Disclaimer
-Use at your own risk.  If you modify the contents of the webhook payload you will have to ensure that the correct values are being parsed / stored in the `snmpTrap.py`.
+
