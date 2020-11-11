@@ -10,6 +10,7 @@ You will find one file `snmpTrap.py` which requires a few libraries (pysnmp & fl
 3. Run the Flask App `python3 -m flask run`
 4. Let the Webhook's trigger
 5. See the Webhook payload on the command line as it's received
+6. Verifiy it's being recieved by your SNMP Trap Receiver
 
 ## SNMP Trap
 The code will generate the SNMP Trap via the `pysnmp` library and send over to the declared endpoint and port.  You can verify or test with a tool such as [MIB Browser](https://www.ireasoning.com/mibbrowser.shtml) to ensure that the SNMP trap is being recieved.
