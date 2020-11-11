@@ -9,6 +9,10 @@ If you modify the contents of the webhook payload you will have to ensure that t
 ## Overview
 You will find one file `snmpTrap.py` which requires a few libraries (pysnmp & flask).  As long as you have these libraries installed on the server (install via `pip install X` command) you should be able to run this web service which will expose the `webhook` endpoint, allow incoming JSON via http POST, and parse the JSON body.
 
+## Prerequisites
+
+Ensure you've permitted inbound traffic to the host running the Flack web service.  Here is the [list of IPs](https://ip-ranges.datadoghq.com/webhooks.json) that are the source of Datadog webhook notifications.  
+
 ## To Run Flask
 1. Install Flask via `pip3 install Flask` 
 2. Define the flask app `export FLASK_APP=link/to/my/python/snmpTrap.py`
