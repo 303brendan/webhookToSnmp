@@ -40,8 +40,8 @@ app = Flask(__name__)
 ############### Set Static Variables for SNMP Trap Address #######################
 ##################################################################################
 
-snmpAddress = "localhost"
-snmpPort = 162
+snmpAddress = "localhost" #charter specified 69.134.208.40 as Netcool IP
+snmpPort = 162 #What port is open for SNMP Trap over UDP
 
 ##################################################################################
 ################# Send SNMP Trap #################################################
