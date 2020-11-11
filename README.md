@@ -19,6 +19,7 @@ You will find one file `snmpTrap.py` which requires a few libraries (pysnmp & fl
 The code will generate the SNMP Trap via the `pysnmp` library and send over to the declared endpoint and port.  You can verify or test with a tool such as [MIB Browser](https://www.ireasoning.com/mibbrowser.shtml) to ensure that the SNMP trap is being recieved.
 
 ## Example Curl Request
+You can run this curl request via CLI to simulate a Webhook `POST` from Datadog.  The body was captured using [PipeDream's Webhook Endpoints](https://pipedream.com/) to capture the outbound payload.
 ```
 curl --insecure -XPOST -H "Content-type: application/json" -d '{
   "method": "POST",
