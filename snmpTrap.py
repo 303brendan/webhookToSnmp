@@ -24,7 +24,7 @@ app = Flask(__name__)
 
 
 ##################################################################################
-############################## Details from Charter ##############################
+############################## Details from Customer ##############################
 ##################################################################################
 # .1 Node - Usually the host or device name of the alarming device.
 # .2 NodeAlias - The IP address of the alarming device.
@@ -40,7 +40,7 @@ app = Flask(__name__)
 ############### Set Static Variables for SNMP Trap Address #######################
 ##################################################################################
 
-snmpAddress = "localhost" #charter specified 69.134.208.40 as Netcool IP
+snmpAddress = "localhost" #enter trap IP or URL
 snmpPort = 162 #What port is open for SNMP Trap over UDP
 
 ##################################################################################
@@ -54,6 +54,7 @@ def respond():
 
     node = webhookPayload['body']['hostname']
 
+    #raplace
     nodeAlias="10.0.0.1" #not sure how to get this from webhook
 
     summary = webhookPayload['body']['title']
@@ -70,7 +71,7 @@ def respond():
     #Check if alert or Resolution
     alerttransition = webhookPayload['body']['alerttransition']
     if "Recovered" in alerttransition: type = 2
-    elif "Warn" in alerttransition: type = 2
+    elif "Warn" in alerttransition: type = 1
     elif "Triggered" in alerttransition: type = 1
     else: type = 2 #catch all but should never be seen
 
