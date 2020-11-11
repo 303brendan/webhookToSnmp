@@ -16,7 +16,7 @@ You will find one file `snmpTrap.py` which requires a few libraries (pysnmp & fl
 The code will generate the SNMP Trap via the `pysnmp` library and send over to the declared endpoint and port.  You can verify or test with a tool such as [MIB Browser](https://www.ireasoning.com/mibbrowser.shtml) to ensure that the SNMP trap is being recieved.
 
 ## Example Curl Request
-```curl --insecure -XPOST -H "Content-type: application/json" -d '{
+curl --insecure -XPOST -H "Content-type: application/json" -d '{
   "method": "POST",
   "path": "/",
   "query": {},
@@ -53,7 +53,7 @@ The code will generate the SNMP Trap via the `pysnmp` library and send over to t
     "id": "5717804682337238360",
     "tags": "host:nls-jenkins-master,monitor"
   }
-}' 'http://127.0.0.1:5000/webhook'```
+}' 'http://127.0.0.1:5000/webhook'
 
 ### Disclaimer
 Use at your own risk.  If you modify the contents of the webhook payload you will have to ensure that the correct values are being parsed / stored in the `snmpTrap.py`.
