@@ -116,8 +116,7 @@ def respond():
         print("Successfully sent trap to {}".format(snmpAddress)+ " on port {}".format(snmpPort))
         print ("")
         return Response(status=200)
-        print ("***************************************************************************************")
-        print ("")
+        
 
 
     #print(request.json);
