@@ -49,25 +49,23 @@ snmpPort = 162 #What port is open for SNMP Trap over UDP
 
 @app.route('/webhook', methods=['POST'])
 def respond():
+    #set webhook JSON payload to variable
     webhookPayload = request.json
-    #Set Variables from webhook
 
+    #Set individual variables from webhookPayload
+
+    #makes it easier so we don't have to declare [body] for each variable
     body = webhookPayload.get('body',None)
     if body:
         node = body.get('hostname','NULL')
-        print (node)
-        #node = webhookPayload['body']['hostname']
 
-        #replace
-        nodeAlias="10.0.0.1" #not sure how to get this from webhook
+        nodeAlias=body.get('ip','NULL') 
 
         summary = body.get('title','NULL')
-        #summary = webhookPayload['body']['title']
 
 
         #Check Status of "alerttype" field and map to numberical value
         alerttype = body.get('alerttype','NULL')
-        #alerttype = webhookPayload['body']['alerttype']
         if "error" in alerttype: severity = 5
         elif "warning" in alerttype: severity = 2
         elif "success" in alerttype: severity = 0
@@ -76,12 +74,10 @@ def respond():
 
         #Check if alert or Resolution
         alerttransition = body.get('alerttransition','NULL')
-        #alerttransition = webhookPayload['body']['alerttransition']
         if "Recovered" in alerttransition: type = 2
         elif "Warn" in alerttransition: type = 1
         elif "Triggered" in alerttransition: type = 1
         else: type = 2 #catch all but should never be seen
-
 
         #Hardcode Datadog Integration
         integration="DATADOG-INTEGRATION" #hardcoded to DATADOG
@@ -89,16 +85,13 @@ def respond():
         alertgroup= "Server" #hard coded for now
 
         alertkey= body.get('hostname','NULL')
-        #alertkey= webhookPayload['body']['hostname']
-
-
+        
         #Additional Fields that may be useful
         link = body.get('link','NULL')
         alertmetric = body.get('alertmetric','NULL')
         fullbody = webhookPayload.get('body','NULL')
         epochdate = body.get('date','NULL')
         alertstatus = body.get('alertstatus','NULL')
-
 
 
         errorIndication, errorStatus, errorIndex, varbinds = next(sendNotification(SnmpEngine(),
