@@ -4,11 +4,11 @@
 
 '''
 This Webhook to SNMP python script is property of whomever wants to maintain it.
-Datadog Sales Engineers have help craft the script to convert Webhook (JSON via HTTP)
-to SNMP Trap via UDP at the customer request.  Datadog will not provide ongoing
-support for this script but it can be modified and used at your own consent. If you
-have any questions please reach out to the developers of the python library pysnmp
-or work with your internal resources to troubleshoot.
+This script was created to help you convert Webhook (JSON via HTTP) to SNMP Trap via UDP.
+Datadog will not provide ongoing support for this script but it can be modified and used at your own consent.
+If you have any questions please reach out to the developers of the python library pysnmp or work with your internal resources to troubleshoot.
+
+If you modify the contents of the webhook payload you will have to ensure that the correct values are being parsed / stored in the snmpTrap.py.
 '''
 
 
