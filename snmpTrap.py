@@ -55,8 +55,21 @@ def respond():
     node = webhookPayload['body']['hostname']
     nodeAlias="10.0.0.1" #not sure how to get this from webhook
     summary = webhookPayload['body']['title']
-    severity = webhookPayload['body']['alerttype'] #might need to map to 0-5
-    type = webhookPayload['body']['alerttransition'] #might need to map to 0-5
+    #Check Status of "alerttype" field and map to numberical value
+    alerttype = webhookPayload['body']['alerttype']
+    if "error" in alerttype: severity = 5
+    elif "warning" in alerttype: severity = 2
+    else: severity = 0 #catch recoveries
+
+
+    #Check if alert or Resolution
+    alerttransition = webhookPayload['body']['alerttransition']
+    if "Recovered" in alerttransition: type = 2
+    elif "Triggered" in alerttransition: type = 1
+    else: alerttransition = 2 #catch
+
+
+    #Hardcode Datadog Integration
     integration="DATADOG-INTEGRATION" #hardcoded to DATADOG
     alertgroup= "Server" #hard coded for now
     alertkey= webhookPayload['body']['hostname']
