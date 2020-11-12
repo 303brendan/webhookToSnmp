@@ -14,7 +14,7 @@ You will find one file `snmpTrap.py` which requires a few libraries (pysnmp & fl
 Ensure you've permitted inbound traffic to the host running the Flack web service.  Here is the [list of IPs](https://ip-ranges.datadoghq.com/webhooks.json) that are the source of Datadog webhook notifications.  
 
 ## To Run Flask
-1. Install Flask via `pip3 install Flask` 
+1. Install Flask via `pip3 install Flask`.  Also install pysnmp via `pip3 install pysnmp`
 2. Define the flask app `export FLASK_APP=link/to/my/python/snmpTrap.py`
 3. Run the Flask App `python3 -m flask run`
 4. Let the Webhook's trigger
