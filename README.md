@@ -55,6 +55,7 @@ curl --insecure -XPOST -H "Content-type: application/json" -d '{
     "scope": "host:nls-jenkins-master",
     "alertmetric": "system.cpu.system",
     "alerttransition": "Triggered",
+    "ip": "10.0.1.15",
     "hostname": "nls-jenkins-master",
     "link": "https://app.datadoghq.com/event/event?id=5717804682337238360",
     "last_updated": "1605070582000",
