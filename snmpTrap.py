@@ -7,7 +7,6 @@ This Webhook to SNMP python script is property of whomever wants to maintain it.
 This script was created to help you convert Webhook (JSON via HTTP) to SNMP Trap via UDP.
 Datadog will not provide ongoing support for this script but it can be modified and used at your own consent.
 If you have any questions please reach out to the developers of the python library pysnmp or work with your internal resources to troubleshoot.
-
 If you modify the contents of the webhook payload you will have to ensure that the correct values are being parsed / stored in the snmpTrap.py.
 '''
 
@@ -56,16 +55,18 @@ def respond():
 
     #makes it easier so we don't have to declare [body] for each variable
     body = webhookPayload.get('body',None)
+    print(body)
     if body:
-        node = body.get('hostname','NULL')
+        print("into if statement")
+        node = webhookPayload.get('hostname','NULL')
 
-        nodeAlias=body.get('ip','NULL') 
+        nodeAlias=webhookPayload.get('ip','NULL') 
 
-        summary = body.get('title','NULL')
+        summary = webhookPayload.get('title','NULL')
 
 
         #Check Status of "alerttype" field and map to numberical value
-        alerttype = body.get('alerttype','NULL')
+        alerttype = webhookPayload.get('alerttype','NULL')
         if "error" in alerttype: severity = 5
         elif "warning" in alerttype: severity = 2
         elif "success" in alerttype: severity = 0
@@ -73,7 +74,7 @@ def respond():
 
 
         #Check if alert or Resolution
-        alerttransition = body.get('alerttransition','NULL')
+        alerttransition = webhookPayload.get('alerttransition','NULL')
         if "Recovered" in alerttransition: type = 2
         elif "Warn" in alerttransition: type = 1
         elif "Triggered" in alerttransition: type = 1
@@ -84,14 +85,14 @@ def respond():
 
         alertgroup= "Server" #hard coded for now
 
-        alertkey= body.get('hostname','NULL')
+        alertkey= webhookPayload.get('hostname','NULL')
         
         #Additional Fields that may be useful
-        link = body.get('link','NULL')
-        alertmetric = body.get('alertmetric','NULL')
+        link = webhookPayload.get('link','NULL')
+        alertmetric = webhookPayload.get('alertmetric','NULL')
         fullbody = webhookPayload.get('body','NULL')
-        epochdate = body.get('date','NULL')
-        alertstatus = body.get('alertstatus','NULL')
+        epochdate = webhookPayload.get('date','NULL')
+        alertstatus = webhookPayload.get('alertstatus','NULL')
 
 
         errorIndication, errorStatus, errorIndex, varbinds = next(sendNotification(SnmpEngine(),
