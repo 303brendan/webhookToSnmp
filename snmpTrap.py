@@ -53,13 +53,12 @@ def respond():
 
     #Set individual variables from webhookPayload
 
-    # for debugging
-    #print(body)
-    if body:
+    #makes it easier so we don't have to declare [body] for each variable
 
+    if webhookPayload:
         node = webhookPayload.get('hostname','NULL')
 
-        nodeAlias = webhookPayload.get('ip','NULL') 
+        nodeAlias=webhookPayload.get('ip','NULL')
 
         summary = webhookPayload.get('title','NULL')
 
@@ -80,12 +79,12 @@ def respond():
         else: type = 2 #catch all but should never be seen
 
         #Hardcode Datadog Integration
-        integration = "DATADOG-INTEGRATION" #hardcoded to DATADOG
+        integration="DATADOG-INTEGRATION" #hardcoded to DATADOG
 
-        alertgroup = "Server" #hard coded for now
+        alertgroup= "Server" #hard coded for now
 
-        alertkey = webhookPayload.get('hostname','NULL')
-        
+        alertkey= webhookPayload.get('hostname','NULL')
+
         #Additional Fields that may be useful
         link = webhookPayload.get('link','NULL')
         alertmetric = webhookPayload.get('alertmetric','NULL')
@@ -115,10 +114,12 @@ def respond():
             print(errorIndication)
 
         else:
-            print ("***************************************************************************************")
-            print("Successfully sent trap to {}".format(snmpAddress)+ " on port {}".format(snmpPort))
-            print ("")
-            return Response(status=200)
+            #Print Entire JSON payload from Webhook for troubleshooting
+              print (webhookPayload)
+              print ("***************************************************************************************")
+              print("Successfully sent trap to {}".format(snmpAddress)+ " on port {}".format(snmpPort))
+              print ("")
+              return Response(status=200)
 
 
 
