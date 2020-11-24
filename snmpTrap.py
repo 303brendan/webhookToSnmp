@@ -53,14 +53,13 @@ def respond():
 
     #Set individual variables from webhookPayload
 
-    #makes it easier so we don't have to declare [body] for each variable
-    body = webhookPayload.get('body',None)
-    print(body)
+    # for debugging
+    #print(body)
     if body:
-        print("into if statement")
+
         node = webhookPayload.get('hostname','NULL')
 
-        nodeAlias=webhookPayload.get('ip','NULL') 
+        nodeAlias = webhookPayload.get('ip','NULL') 
 
         summary = webhookPayload.get('title','NULL')
 
@@ -81,11 +80,11 @@ def respond():
         else: type = 2 #catch all but should never be seen
 
         #Hardcode Datadog Integration
-        integration="DATADOG-INTEGRATION" #hardcoded to DATADOG
+        integration = "DATADOG-INTEGRATION" #hardcoded to DATADOG
 
-        alertgroup= "Server" #hard coded for now
+        alertgroup = "Server" #hard coded for now
 
-        alertkey= webhookPayload.get('hostname','NULL')
+        alertkey = webhookPayload.get('hostname','NULL')
         
         #Additional Fields that may be useful
         link = webhookPayload.get('link','NULL')
