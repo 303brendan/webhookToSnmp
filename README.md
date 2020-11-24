@@ -16,7 +16,7 @@ Ensure you've permitted inbound traffic to the host running the Flack web servic
 ## To Run Flask
 1. Install Flask via `pip3 install Flask`.  Also install pysnmp via `pip3 install pysnmp`
 2. Define the flask app `export FLASK_APP=link/to/my/python/snmpTrap.py`
-3. Run the Flask App `python3 -m flask run`
+3. Run the Flask App `python3 -m flask run --host=0.0.0.0`
 4. Let the Webhook's trigger
 5. See the Webhook payload on the command line as it's received
 6. Verifiy it's being recieved by your SNMP Trap Receiver
