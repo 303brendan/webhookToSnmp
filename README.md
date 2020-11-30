@@ -28,44 +28,24 @@ The code will generate the SNMP Trap via the `pysnmp` library and send over to t
 You can run this curl request via CLI to simulate a Webhook `POST` from Datadog.  The body was captured using [PipeDream's Webhook Endpoints](https://pipedream.com/) to capture the outbound payload.
 ```
 curl --insecure -XPOST -H "Content-type: application/json" -d '{
-  "method": "POST",
-  "path": "/",
-  "query": {},
-  "headers": {
-    "x-forwarded-for": "52.20.96.17",
-    "x-forwarded-proto": "https",
-    "x-forwarded-port": "443",
-    "host": "96b171e044dbe5ce6775d67652bbbdb9.m.pipedream.net",
-    "x-amzn-trace-id": "Root=1-5fab6ef7-2fd0906963fbbca7557f218a",
-    "content-length": "1931",
-    "accept-encoding": "gzip, deflate",
-    "accept": "*/*",
-    "user-agent": "python-requests/2.24.0",
-    "content-type": "application/json; charset=utf-8",
-    "x-datadog-trace-id": "14706617228889315125",
-    "x-datadog-parent-id": "7625497438789849858",
-    "x-datadog-sampling-priority": "1"
-  },
-  "bodyRaw": "{\n    \"body\": \"%%%\\nCPU is high on nls-jenkins-master with an IP of 10.88.11.35  @webhook-datadogSupportTest\\n\\nTest notification triggered by support-acmecorp-31.\\n\\n[![Metric Graph](https://p.datadoghq.com/snapshot/view/dd-snapshots-prod/org_475940/2020-11-11/95d50cd6149a071c3569499edc3c5e15e1a8f9cd.png)](https://app.datadoghq.com/monitors#25562336?to_ts=1605070640000&group=host%3Anls-jenkins-master&from_ts=1605066980000)\\n\\n**system.cpu.system** over **host:nls-jenkins-master** was **> 0.1** at least once during the **last 5m**.\\n\\nThe monitor was last triggered at Wed Nov 11 2020 04:56:20 UTC.\\n\\n- - -\\n\\n[[Monitor Status](https://app.datadoghq.com/monitors#25562336?group=host%3Anls-jenkins-master)] \\u00b7 [[Edit Monitor](https://app.datadoghq.com/monitors#25562336/edit)] \\u00b7 [[View nls-jenkins-master](https://app.datadoghq.com/infrastructure?filter=nls-jenkins-master)] \\u00b7 [[Show Processes](https://app.datadoghq.com/process?sort=cpu%2CDESC&to_ts=1605070700000&tags=host%3Anls-jenkins-master&from_ts=1605069680000&live=false&showSummaryGraphs=true)] \\u00b7 [[Related Logs](https://app.datadoghq.com/logs?query=host%3A%22nls-jenkins-master%22&live=false&to_ts=1605070580000&from_ts=1605069680000)]\\n%%%\",\n    \"alertid\": \"25562336\",\n    \"alertstatus\": \"system.cpu.system over *** was > 0.1 at least once during the last 5m**.\",\n    \"alerttype\": \"error\",\n    \"scope\" : \"host:nls-jenkins-master\",\n    \"alertmetric\": \"system.cpu.system\",\n    \"alerttransition\": \"Triggered\",\n    \"hostname\": \"nls-jenkins-master\",\n    \"link\":\"https://app.datadoghq.com/event/event?id=5717804682337238360\",\n    \"last_updated\": \"1605070582000\",\n    \"event_type\": \"metric_alert_monitor\",\n    \"title\": \"[Triggered on {host:nls-jenkins-master}] [TEST] CPU is high on nls-jenkins-master with an IP of 10.88.11.35\",\n    \"date\": \"1605070582000\",\n    \"id\": \"5717804682337238360\",\n    \"tags\": \"host:nls-jenkins-master,monitor\"\n}",
-  "body": {
-    "body": "%%%\nCPU is high on nls-jenkins-master with an IP of 10.88.11.35  @webhook-datadogSupportTest\n\nTest notification triggered by support-acmecorp-31.\n\n[![Metric Graph](https://p.datadoghq.com/snapshot/view/dd-snapshots-prod/org_475940/2020-11-11/95d50cd6149a071c3569499edc3c5e15e1a8f9cd.png)](https://app.datadoghq.com/monitors#25562336?to_ts=1605070640000&group=host%3Anls-jenkins-master&from_ts=1605066980000)\n\n**system.cpu.system** over **host:nls-jenkins-master** was **> 0.1** at least once during the **last 5m**.\n\nThe monitor was last triggered at Wed Nov 11 2020 04:56:20 UTC.\n\n- - -\n\n[[Monitor Status](https://app.datadoghq.com/monitors#25562336?group=host%3Anls-jenkins-master)] · [[Edit Monitor](https://app.datadoghq.com/monitors#25562336/edit)] · [[View nls-jenkins-master](https://app.datadoghq.com/infrastructure?filter=nls-jenkins-master)] · [[Show Processes](https://app.datadoghq.com/process?sort=cpu%2CDESC&to_ts=1605070700000&tags=host%3Anls-jenkins-master&from_ts=1605069680000&live=false&showSummaryGraphs=true)] · [[Related Logs](https://app.datadoghq.com/logs?query=host%3A%22nls-jenkins-master%22&live=false&to_ts=1605070580000&from_ts=1605069680000)]\n%%%",
-    "alertid": "25562336",
-    "alertstatus": "system.cpu.system over *** was > 0.1 at least once during the last 5m**.",
-    "alerttype": "error",
-    "scope": "host:nls-jenkins-master",
-    "alertmetric": "system.cpu.system",
-    "alerttransition": "Triggered",
-    "ip": "10.0.1.15",
-    "hostname": "nls-jenkins-master",
-    "link": "https://app.datadoghq.com/event/event?id=5717804682337238360",
-    "last_updated": "1605070582000",
+    "body": "%%%\n\n@slack-brendan-demo CPU is high on GamingPC with a threshold of 70.0 \n@webhook-brendansnmp \n\nTest notification triggered by brendan.roche@datadoghq.com.\n\n[![Metric Graph](https://p.datadoghq.com/snapshot/view/dd-snapshots-prod/org_11287/2020-11-30/aec053705bfb9108b43c3d94c578971d842dd1a0.png)](https://app.datadoghq.com/monitors#2865250?to_ts=1606757679000&group=host%3Arouter-0&from_ts=1606754019000)\n\n**system.cpu.system** over **host:router-0** was **> 70.0** at all times during the **last 5m**.\n\nThe monitor was last triggered at Mon Nov 30 2020 17:33:39 UTC.\n\n- - -\n\n[[Monitor Status](https://app.datadoghq.com/monitors#2865250?group=host%3Arouter-0)] · [[Edit Monitor](https://app.datadoghq.com/monitors#2865250/edit)] · [[View router-0](https://app.datadoghq.com/infrastructure?filter=router-0)] · [[Show Processes](https://app.datadoghq.com/process?sort=cpu%2CDESC&to_ts=1606757739000&tags=host%3Arouter-0&from_ts=1606756719000&live=false&showSummaryGraphs=true)] · [[Related Logs](https://app.datadoghq.com/logs?query=host%3A%22router-0%22&live=false&to_ts=1606757619000&from_ts=1606756719000)]\n%%%",
+    "last_updated": "1606757621000",
     "event_type": "metric_alert_monitor",
-    "title": "[Triggered on {host:nls-jenkins-master}] [TEST] CPU is high on nls-jenkins-master with an IP of 10.88.11.35",
-    "date": "1605070582000",
-    "id": "5717804682337238360",
-    "tags": "host:nls-jenkins-master,monitor"
-  }
-}' 'http://127.0.0.1:5000/webhook'
+    "title": "[Triggered] [TEST] CPU is high on GamingPC - BMR",
+    "date": "1606757621000",
+    "hostname": "router-0",
+    "ip": "$IP",
+    "alerttype": "error",
+    "alerttransition": "Triggered",
+    "link": "https://app.datadoghq.com/event/event?id=5746108497135337488",
+    "alertmetric": "system.cpu.system",
+    "alertstatus": "system.cpu.system over *** was > 70.0 at all times during the last 5m**.",
+    "org": {
+      "id": "11287",
+      "name": "Datadog Demo (11287)"
+    },
+    "id": "5746108497135337488"
+  }' 'http://localhost:5000/webhook'
 ```
 
 
