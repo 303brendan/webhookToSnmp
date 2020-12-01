@@ -34,7 +34,7 @@ curl --insecure -XPOST -H "Content-type: application/json" -d '{
     "title": "[Triggered] [TEST] CPU is high on GamingPC - BMR",
     "date": "1606757621000",
     "hostname": "router-0",
-    "ip": "10.0..0.15",
+    "ip": "10.0.0.15",
     "alerttype": "error",
     "alerttransition": "Triggered",
     "link": "https://app.datadoghq.com/event/event?id=5746108497135337488",
