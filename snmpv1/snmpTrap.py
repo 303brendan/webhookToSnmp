@@ -117,7 +117,7 @@ def respond():
         iterator = sendNotification(
             SnmpEngine(),
             CommunityData('public', mpModel=0),
-            UdpTransportTarget(('54.185.177.29', 162)),
+            UdpTransportTarget(('{}'.format(snmpAddress), snmpPort)), #define IP or URL and Port to use for trap
             ContextData(),
             'trap',
             NotificationType(
