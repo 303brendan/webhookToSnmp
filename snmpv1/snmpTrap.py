@@ -51,15 +51,10 @@ def respond():
 
     #Set individual variables from webhookPayload
 
-    #makes it easier so we don't have to declare [body] for each variable
-
     if webhookPayload:
         node = webhookPayload.get('hostname','NULL')
-
         nodeAlias=webhookPayload.get('ip','NULL')
-
         summary = webhookPayload.get('title','NULL')
-
 
         #Check Status of "alerttype" field and map to numberical value
         alerttype = webhookPayload.get('alerttype','NULL')
@@ -67,7 +62,6 @@ def respond():
         elif "warning" in alerttype: severity = 2
         elif "success" in alerttype: severity = 0
         else: severity = 0 #catch all should not be hit
-
 
         #Check if alert or Resolution
         alerttransition = webhookPayload.get('alerttransition','NULL')
