@@ -18,9 +18,7 @@ from pysnmp.hlapi import *
 from pysnmp import debug
 from flask import Flask, request, Response
 
-
 app = Flask(__name__)
-
 
 ##################################################################################
 ############################## Details from Customer ##############################
@@ -109,13 +107,10 @@ def respond():
                 ('.1.3.6.1.4.1.999.6', OctetString('{}'.format(integration))),
                 ('.1.3.6.1.4.1.999.7', OctetString('{}'.format(alertgroup))),
                 ('.1.3.6.1.4.1.999.8', OctetString('{}'.format(alertkey)))
-
-
             ).loadMibs(
                 'SNMPv2-MIB'
             )
         )
-
     errorIndication, errorStatus, errorIndex, varBinds = next(iterator)
 
     if errorIndication:
@@ -128,7 +123,3 @@ def respond():
         print("Successfully sent trap to {}".format(snmpAddress)+ " on port {}".format(snmpPort))
         print ("")
         return Response(status=200)
-
-
-
-    #print(request.json);
