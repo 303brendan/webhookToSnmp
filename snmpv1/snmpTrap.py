@@ -39,7 +39,7 @@ app = Flask(__name__)
 ############### Set Static Variables for SNMP Trap Address #######################
 ##################################################################################
 
-snmpAddress = "54.185.177.29" #enter trap IP or URL
+snmpAddress = "localhost" #enter trap IP or URL
 snmpPort = 162 #What port is open for SNMP Trap over UDP
 
 ##################################################################################
