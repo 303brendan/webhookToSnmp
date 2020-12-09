@@ -7,7 +7,7 @@ This Webhook to SNMP python script is property of whomever wants to maintain it.
 If you modify the contents of the webhook payload you will have to ensure that the correct values are being parsed / stored in the `snmpTrap.py`.
 
 ## Overview
-You will find one file `snmpTrap.py` which requires the pysnmp library and AWS API Gateway.  API Gateway will receive the Webhook (JSON via HTTP POST) and send the http.body to the related Lambda Function (snmpTrap.py).
+You will find one file `snmpTrap.py` which requires the pysnmp library and AWS API Gateway.  API Gateway will receive the Webhook (JSON via HTTP POST) and send the `body` to the related Lambda Function (snmpTrap.py) which will parse the fields from the API Gateway `event` payload.
 
 ## Prerequisites
 
