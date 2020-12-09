@@ -17,5 +17,5 @@ Ensure that you have API gateway configured with a public "REST Endpoint" that a
 The code will generate the SNMP Trap via the `pysnmp` library and send over to the declared endpoint and port in the lambda function.  
 
 ## Resources
-- [https://github.com/jason-dour/pysnmp-aws-lambda-layer](https://github.com/jason-dour/pysnmp-aws-lambda-layer)
+- [https://github.com/jason-dour/pysnmp-aws-lambda-layer](https://github.com/jason-dour/pysnmp-aws-lambda-layer) - Lambda layers which creates layers for each version of python w/ the necessary `pysnmp` packages.
 
