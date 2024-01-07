@@ -87,22 +87,28 @@ def respond():
         epochdate = webhookPayload.get('date','NULL')
         alertstatus = webhookPayload.get('alertstatus','NULL')
 
-
-        errorIndication, errorStatus, errorIndex, varbinds = next(sendNotification(SnmpEngine(),
-             CommunityData('not_public'),
-             UdpTransportTarget(('{}'.format(snmpAddress), snmpPort)), #define IP or URL and Port to use for trap
-             ContextData(),
-             'trap',
-             [ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.1'), OctetString('{}'.format(node))),
-              ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.2'), OctetString('{}'.format(nodeAlias))),
-              ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.3'), OctetString('{}'.format(summary))),
-              ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.4'), OctetString('{}'.format(severity))),
-              ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.5'), OctetString('{}'.format(type))),
-              ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.6'), OctetString('{}'.format(integration))),
-              ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.7'), OctetString('{}'.format(alertgroup))),
-              ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.8'), OctetString('{}'.format(alertkey)))
-              ])
+         errorIndication, errorStatus, errorIndex, varBinds = next(
+              sendNotification(
+              SnmpEngine(),
+              CommunityData('not_public'),
+              UdpTransportTarget(('{}'.format(snmpAddress), snmpPort)), #define IP or URL and Port to use for trap
+              ContextData(),
+              'trap',
+              NotificationType(
+              # your trap type
+                  ObjectIdentity('1.3.6.1.4.1.999.1.15.6.1')
+                  ).addVarBinds(
+                  ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.1'), OctetString('{}'.format(node))),
+                  ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.2'), OctetString('{}'.format(nodeAlias))),
+                  ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.3'), OctetString('{}'.format(summary))),
+                  ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.4'), OctetString('{}'.format(severity))),
+                  ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.5'), OctetString('{}'.format(type))),
+                  ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.6'), OctetString('{}'.format(integration))),
+                  ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.7'), OctetString('{}'.format(alertgroup))),
+                  ObjectType(ObjectIdentity('.1.3.6.1.4.1.999.8'), OctetString('{}'.format(alertkey)))
+            )
         )
+    )
 
         if errorIndication:
             print(errorIndication)
